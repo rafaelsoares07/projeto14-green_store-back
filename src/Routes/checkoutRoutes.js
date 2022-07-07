@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { carrinho, checkout } from '../Controllers/checkoutController';
+import { carrinho, checkout } from '../Controllers/checkoutController.js';
 
 const router = Router();
 
