@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import authRoutes from './Routes/authRoutes.js';
+import productRoutes from './Routes/productRoutes.js';
+import checkoutRoutes from './Routes/checkoutRoutes.js';
 
 const app = express();
 
@@ -8,18 +11,8 @@ app.use(cors());
 dotenv.config();
 app.use(express.json());
 
+app.use(authRoutes);
+app.use(productRoutes);
+app.use(checkoutRoutes);
 
-//rota de teste
-
-app.get("/ola", (req, res)=>{
-    
-    res.status(222).send('FUNFOU')
-})
-
-
-
-const PORT = process.env.PORT
-
-app.listen(PORT, ()=>{
-    console.log("servidor rodando")
-})
+app.listen(process.env.PORT);
