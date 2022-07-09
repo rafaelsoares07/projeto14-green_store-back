@@ -5,5 +5,6 @@ export async function checkout(req, res){
 }
 
 export async function carrinho(req, res){
-    
+    res.send(200)
+    return
 }
