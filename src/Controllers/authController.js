@@ -18,6 +18,12 @@ export async function cadastro(req, res){
             return res.status(422).send('Todos os campos são obrigatórios');
         }
 
+        const usuarioJaExiste = await db.collection('usuarios').find({ email: novoUsuario.email });
+
+        if(usuarioJaExiste){
+            return res.status(422).send('E-mail ou senha inválidos');
+        }
+
         const senhaHash = bcrypt.hashSync(novoUsuario.senha, 10);
 
         await db.collection('usuarios').insertOne({
