@@ -15,4 +15,6 @@ app.use(authRoutes);
 app.use(productRoutes);
 app.use(checkoutRoutes);
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT,()=>{
+    console.log('servidor rodando')
+});
