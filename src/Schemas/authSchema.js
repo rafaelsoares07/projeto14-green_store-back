@@ -12,3 +12,6 @@ export const authCadastroSchema = joi.object({
     cidade: joi.string().required(),
     estado: joi.string().required()
 })
+
+
+teste branch

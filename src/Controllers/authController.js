@@ -3,6 +3,12 @@ import { authCadastroSchema } from '../Schemas/authSchema.js';
 import bcrypt from 'bcrypt';
 
 export async function login(req, res){
+    const userLogin = req.body
+
+
+    
+
+    res.status(200).send("Logou com sucesso")
 
 }
 
@@ -14,7 +20,7 @@ export async function cadastro(req, res){
 
         const dadosValidos = authCadastroSchema.validate(novoUsuario);
 
-        if(dadosValidos.error) {
+        if(dadosValidos.error) { 
             return res.status(422).send('Todos os campos são obrigatórios');
         }
 
