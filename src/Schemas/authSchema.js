@@ -12,3 +12,8 @@ export const authCadastroSchema = joi.object({
     cidade: joi.string().required(),
     estado: joi.string().required()
 })
+
+export const authLoginSchema = joi.object({
+    email: joi.string().email().required(),
+    senha: joi.string().required()
+})

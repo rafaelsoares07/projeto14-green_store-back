@@ -1,4 +1,4 @@
-import db from '../dbStrategy/mongo.js';
+import {db} from '../dbStrategy/mongo.js';
 
 
 export async function cadastrarProdutos(req, res){
