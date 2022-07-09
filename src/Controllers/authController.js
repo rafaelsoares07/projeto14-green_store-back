@@ -1,4 +1,4 @@
-import db from '../dbStrategy/mongo.js';
+import {db} from '../dbStrategy/mongo.js';
 import { authCadastroSchema, authLoginSchema } from '../Schemas/authSchema.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -36,8 +36,7 @@ export async function login(req, res){
         console.log(chaveJTW)
         const token =  jwt.sign(dados,chaveJTW)
         
-        const descrip = jwt.verify(token, chaveJTW)
-        console.log(descrip)
+
 
     
         res.status(200).json({token})
