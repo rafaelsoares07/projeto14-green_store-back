@@ -1,15 +1,38 @@
 import db from '../dbStrategy/mongo.js';
-import { authCadastroSchema } from '../Schemas/authSchema.js';
+import { authCadastroSchema, authLoginSchema } from '../Schemas/authSchema.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
 
 export async function login(req, res){
-    const userLogin = req.body
 
+    try{
+        const Usuario = req.body
 
+        const UsuarioValido = authLoginSchema.validate(Usuario)
+        if(UsuarioValido.error){
+            return res.status(422).send("Preencha os campos corretamente")
+        }
     
+        const UsuarioExiste = await db.collection('usuarios').findOne({email:Usuario.email})
+        if(!UsuarioExiste){
+            return res.status(400).send('Usuario nao existe ')
+        }
+    
+        const SenhaValida = bcrypt.compareSync(Usuario.senha,UsuarioExiste.senha)
+        if(!SenhaValida){
+            return res.status(422).send('Senha invalida')
+        }
 
-    res.status(200).send("Logou com sucesso")
-
+        
+        
+    
+        res.status(200).send("Logou com sucesso")
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).send('Erro ao logar')
+    }
 }
 
 export async function cadastro(req, res){

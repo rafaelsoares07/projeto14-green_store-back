@@ -13,5 +13,7 @@ export const authCadastroSchema = joi.object({
     estado: joi.string().required()
 })
 
-
-teste branch
+export const authLoginSchema = joi.object({
+    email: joi.string().email().required(),
+    senha: joi.string().required()
+})
