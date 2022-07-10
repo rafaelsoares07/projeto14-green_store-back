@@ -5,7 +5,7 @@ export const authCadastroSchema = joi.object({
     email: joi.string().email().required(),
     senha: joi.string().required(),
     senhaConfirma: joi.ref('senha'),
-    cep: joi.required(),
+    cep: joi.string().required(),
     rua: joi.string().required(),
     bairro: joi.string().required(),
     numero: joi.number().required(),

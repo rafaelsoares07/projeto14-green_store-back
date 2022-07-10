@@ -5,7 +5,7 @@ import { postCarrinho, getCarrinho, checkout } from '../Controllers/checkoutCont
 const router = Router();
 
 router.get('/carrinho', UserValidate, getCarrinho);
-router.post('/carrinho', UserValidate, postCarrinho);
+router.post('/carrinho', UserValidate,  postCarrinho);
 router.post('/checkout', checkout);
 
 export default router;

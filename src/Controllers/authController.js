@@ -31,7 +31,6 @@ export async function login(req, res){
 
         const dados = {idSessao:_id}
         const chaveJTW = process.env.JWT_SECRET 
-        console.log(chaveJTW)
         const token =  jwt.sign(dados,chaveJTW)
         
         res.status(200).json({token})
@@ -39,7 +38,7 @@ export async function login(req, res){
     catch(error){
         console.log(error)
         res.status(500).send('Erro ao logar')
-    }
+    } 
 }
 
 export async function cadastro(req, res){
@@ -54,7 +53,7 @@ export async function cadastro(req, res){
             return res.status(422).send('Todos os campos são obrigatórios');
         }
 
-        const usuarioJaExiste = await db.collection('usuarios').find({ email: novoUsuario.email });
+        const usuarioJaExiste = await db.collection('usuarios').findOne({ email: novoUsuario.email });
 
         if(usuarioJaExiste){
             return res.status(422).send('E-mail ou senha inválidos');

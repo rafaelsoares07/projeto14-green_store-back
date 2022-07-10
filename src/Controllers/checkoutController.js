@@ -12,7 +12,11 @@ export async function postCarrinho(req, res){
 
     try {
         
-        await db.collections('compras').insertOne({dadosCompra});
+        await db.collection('compras').insertOne({ 
+                                                    token: dadosCompra.token,
+                                                    produto: dadosCompra.produto,
+                                                    valor: dadosCompra.valor
+        });
 
         res.sendStatus(201);
     }   
@@ -25,10 +29,11 @@ export async function postCarrinho(req, res){
 
 export async function getCarrinho(req, res){
 
-    const { sectionExist } = res.locals;
+    const token = req.body.token;
 
     try {
-        const arrayCompras = await db.collections('compras').find({token: sectionExist.token}).toArray();
+    
+        const arrayCompras = await db.collection('compras').find({token: token}).toArray();
 
         res.status(201).send(arrayCompras);
     }
