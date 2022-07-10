@@ -6,14 +6,14 @@ dotenv.config();
 
 async function UserValidate(req, res, next){
     const token = req.headers.authorization?.replace("Bearer ","").trim();
-    const chaveJTW = process.env.JWT_SECRET
+    const chaveJTW = process.env.JWT_SECRET;
 
-    const TokenValido = jwt.verify(token, chaveJTW)  
+    const TokenValido = jwt.verify(token, chaveJTW);  
 
-    const sectionExist = await db.collection('sessoes').findOne({_id:new objectId(TokenValido.idSessao)})
+    const sectionExist = await db.collection('sessoes').findOne({_id:new objectId(TokenValido.idSessao)});
 
     res.locals.sectionExist = sectionExist;
-    console.log(res.locals.sectionExist)
+    console.log(res.locals.sectionExist);
     
     next()
  

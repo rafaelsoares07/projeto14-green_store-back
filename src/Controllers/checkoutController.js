@@ -11,12 +11,28 @@ export async function postCarrinho(req, res){
     const dadosCompra = req.body;
 
     try {
-        
-        await db.collection('compras').insertOne({ 
-                                                    token: dadosCompra.token,
-                                                    produto: dadosCompra.produto,
-                                                    valor: dadosCompra.valor
-        });
+
+        const jaTemNoCarrinho = await db.collection('compras').findOne({ idProduto: dadosCompra.idProduto });
+
+        if(jaTemNoCarrinho){
+            await db.collection('compras').updateOne({
+                                                        idProduto: dadosCompra.idProduto }, {
+                                                        $inc: {
+                                                            quantidade: 1
+                                                        }
+                                                    });
+        }
+        else { 
+            await db.collection('compras').insertOne({ 
+                token: dadosCompra.token,
+                idProduto: dadosCompra.idProduto,
+                urlImage: dadosCompra.urlImage,
+                titulo: dadosCompra.titulo,
+                valor: dadosCompra.valor,
+                quantidade: 1
+            });
+        } 
+    
 
         res.sendStatus(201);
     }   
@@ -29,7 +45,7 @@ export async function postCarrinho(req, res){
 
 export async function getCarrinho(req, res){
 
-    const token = req.body.token;
+    const token = req.headers.authorization?.replace("Bearer ","").trim();
 
     try {
     
