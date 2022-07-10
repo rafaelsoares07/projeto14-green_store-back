@@ -4,6 +4,7 @@ import { produtos, cadastrarProdutos, cadastrarProduto } from '../Controllers/pr
 const router = Router();
 
 router.get('/', produtos);
-router.post('/cadastrarProdutos', cadastrarProdutos)
-router.post('/cadastrarProduto', cadastrarProduto)
+router.post('/cadastrarProdutos', cadastrarProdutos);
+router.post('/cadastrarProduto', cadastrarProduto);
+
 export default router;

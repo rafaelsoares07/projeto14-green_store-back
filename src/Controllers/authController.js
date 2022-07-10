@@ -6,8 +6,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
-
 export async function login(req, res){
 
     try{
@@ -36,9 +34,6 @@ export async function login(req, res){
         console.log(chaveJTW)
         const token =  jwt.sign(dados,chaveJTW)
         
-
-
-    
         res.status(200).json({token})
     }
     catch(error){
