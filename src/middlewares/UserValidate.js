@@ -5,14 +5,15 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 
 async function UserValidate(req, res, next){
-    const token = req.headers.authorization.replace("Bearer ","")
-    const chaveJTW = process.env.JWT_SECRET
+    const token = req.headers.authorization?.replace("Bearer ","").trim();
+    const chaveJTW = process.env.JWT_SECRET;
 
-    const TokenValido = jwt.verify(token, chaveJTW)  
+    const TokenValido = jwt.verify(token, chaveJTW);  
 
-    const sectionExist = await db.collection('sessoes').findOne({_id:new objectId(TokenValido.idSessao)})
+    const sectionExist = await db.collection('sessoes').findOne({_id:new objectId(TokenValido.idSessao)});
 
-    res.locals.sectionExist = sectionExist
+    res.locals.sectionExist = sectionExist;
+    console.log(res.locals.sectionExist);
     
     next()
  
