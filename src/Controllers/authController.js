@@ -6,8 +6,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
-
 export async function login(req, res){
 
     try{
@@ -33,7 +31,6 @@ export async function login(req, res){
 
         const dados = {idSessao:_id}
         const chaveJTW = process.env.JWT_SECRET 
-        console.log(chaveJTW)
         const token =  jwt.sign(dados,chaveJTW)
         
 
@@ -41,11 +38,12 @@ export async function login(req, res){
 
     
         res.status(200).json({token, UsuarioExiste})
+
     }
     catch(error){
         console.log(error)
         res.status(500).send('Erro ao logar')
-    }
+    } 
 }
 
 export async function cadastro(req, res){
@@ -58,6 +56,12 @@ export async function cadastro(req, res){
 
         if(dadosValidos.error) { 
             return res.status(422).send('Todos os campos são obrigatórios');
+        }
+
+        const usuarioJaExiste = await db.collection('usuarios').findOne({ email: novoUsuario.email });
+
+        if(usuarioJaExiste){
+            return res.status(422).send('E-mail ou senha inválidos');
         }
 
         const senhaHash = bcrypt.hashSync(novoUsuario.senha, 10);
