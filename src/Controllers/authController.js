@@ -33,7 +33,12 @@ export async function login(req, res){
         const chaveJTW = process.env.JWT_SECRET 
         const token =  jwt.sign(dados,chaveJTW)
         
-        res.status(200).json({token})
+
+        console.log(UsuarioExiste)
+
+    
+        res.status(200).json({token, UsuarioExiste})
+
     }
     catch(error){
         console.log(error)
