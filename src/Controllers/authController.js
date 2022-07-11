@@ -37,9 +37,10 @@ export async function login(req, res){
         const token =  jwt.sign(dados,chaveJTW)
         
 
+        console.log(UsuarioExiste)
 
     
-        res.status(200).json({token})
+        res.status(200).json({token, UsuarioExiste})
     }
     catch(error){
         console.log(error)
