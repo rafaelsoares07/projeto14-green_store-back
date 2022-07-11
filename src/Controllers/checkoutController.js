@@ -3,6 +3,16 @@ import UserValidate from '../middlewares/UserValidate.js';
 
 export async function checkout(req, res){
 
+
+    const idUser = res.locals.sectionExist.idUsuario
+    const infosCompra = req.body
+
+    await db.collection("Compras").insertOne({idUsuario:idUser, infosCompra})
+
+    console.log(req.body)
+    console.log(idUser)
+
+    res.status(200).send('deu certo ')
     
 }
 

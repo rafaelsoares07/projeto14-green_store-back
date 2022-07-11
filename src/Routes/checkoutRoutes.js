@@ -6,6 +6,6 @@ const router = Router();
 
 router.get('/carrinho', UserValidate, getCarrinho);
 router.post('/carrinho', UserValidate,  postCarrinho);
-router.post('/checkout', checkout);
+router.post('/checkout',UserValidate, checkout);
 
 export default router;
